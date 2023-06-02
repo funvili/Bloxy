@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://c8pw8wqplss6x"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/item_data.gd" id="1_l26ff"]
+[ext_resource type="Texture2D" uid="uid://dh78ux68smska" path="res://Map.png" id="2_sqa3m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq0t2"]
+atlas = ExtResource("2_sqa3m")
+region = Rect2(160, 0, 160, 160)
+
+[resource]
+script = ExtResource("1_l26ff")
+name = "Dirt"
+description = "A brown block somewhat..."
+stackable = true
+texture = SubResource("AtlasTexture_pq0t2")

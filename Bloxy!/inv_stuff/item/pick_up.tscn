@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxaban8m43bkv"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/pick_up.gd" id="1_7fyhy"]
+[ext_resource type="Texture2D" uid="uid://c8duhilfygb1k" path="res://inv_stuff/item_textures/Grass.png" id="2_p7yxw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mbhr4"]
+albedo_texture = ExtResource("2_p7yxw")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8rlh"]
+
+[node name="PickUp" type="RigidBody3D"]
+continuous_cd = true
+script = ExtResource("1_7fyhy")
+
+[node name="CsgBox3d" type="CSGBox3D" parent="."]
+material_override = SubResource("StandardMaterial3D_mbhr4")
+size = Vector3(0.75, 0.75, 0.75)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_o8rlh")
+
+[node name="Area3d" type="Area3D" parent="."]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="Area3d"]
+shape = SubResource("BoxShape3D_o8rlh")
+
+[connection signal="body_entered" from="Area3d" to="." method="_on_area_3d_body_entered"]

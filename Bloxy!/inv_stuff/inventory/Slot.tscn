@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://diex08t5n14ga"]
+
+[ext_resource type="Script" path="res://inv_stuff/inventory/Slot.gd" id="1_dfbn0"]
+
+[node name="Slot" type="Panel"]
+custom_minimum_size = Vector2i(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_dfbn0")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2i(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 60.0
+offset_bottom = 60.0
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 26.0
+grow_horizontal = 0
+text = "2"
+horizontal_alignment = 2
+
+[connection signal="gui_input" from="." to="." method="_on_slot_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_slot_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_slot_mouse_exited"]

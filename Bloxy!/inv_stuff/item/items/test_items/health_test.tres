@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dng660hef1rkk"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/item_data_consumable.gd" id="1_8fy23"]
+[ext_resource type="Texture2D" uid="uid://c1dlfd80b1bks" path="res://inv_stuff/item/ItemAtlas.tres" id="2_kmhej"]
+
+[resource]
+script = ExtResource("1_8fy23")
+heal_value = 1
+name = "HealthTest"
+description = "dont ask why it looks like water"
+stackable = true
+texture = ExtResource("2_kmhej")

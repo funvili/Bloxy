@@ -1,0 +1,183 @@
+[gd_resource type="VoxelBlockyLibrary" load_steps=16 format=3 uid="uid://ciqvi7kfhiitg"]
+
+[ext_resource type="Texture2D" uid="uid://dh78ux68smska" path="res://Map.png" id="1_3k37a"]
+[ext_resource type="Material" uid="uid://b7afdfgyi1km2" path="res://Matarial.tres" id="1_8j8tj"]
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_w0jac"]
+voxel_name = &"air"
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_mf1fv"]
+voxel_name = &"grass"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(0, 0)
+cube_tiles_right = Vector2(0, 0)
+cube_tiles_bottom = Vector2(0, 0)
+cube_tiles_top = Vector2(0, 0)
+cube_tiles_back = Vector2(0, 0)
+cube_tiles_front = Vector2(0, 0)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_3rphd"]
+voxel_name = &"gold"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(2, 2)
+cube_tiles_right = Vector2(2, 2)
+cube_tiles_bottom = Vector2(2, 2)
+cube_tiles_top = Vector2(2, 2)
+cube_tiles_back = Vector2(2, 2)
+cube_tiles_front = Vector2(2, 2)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_crt78"]
+voxel_name = &"Chest"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(3, 2)
+cube_tiles_right = Vector2(3, 2)
+cube_tiles_bottom = Vector2(3, 2)
+cube_tiles_top = Vector2(3, 2)
+cube_tiles_back = Vector2(3, 2)
+cube_tiles_front = Vector2(3, 2)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_dxhap"]
+voxel_name = &"dirt"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(1, 0)
+cube_tiles_right = Vector2(1, 0)
+cube_tiles_bottom = Vector2(1, 0)
+cube_tiles_top = Vector2(1, 0)
+cube_tiles_back = Vector2(1, 0)
+cube_tiles_front = Vector2(1, 0)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_jhvbl"]
+voxel_name = &"stone"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(2, 0)
+cube_tiles_right = Vector2(2, 0)
+cube_tiles_bottom = Vector2(2, 0)
+cube_tiles_top = Vector2(2, 0)
+cube_tiles_back = Vector2(2, 0)
+cube_tiles_front = Vector2(2, 0)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_cntde"]
+voxel_name = &"sand"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(0, 1)
+cube_tiles_right = Vector2(0, 1)
+cube_tiles_bottom = Vector2(0, 1)
+cube_tiles_top = Vector2(0, 1)
+cube_tiles_back = Vector2(0, 1)
+cube_tiles_front = Vector2(0, 1)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu452"]
+transparency = 1
+depth_draw_mode = 1
+albedo_texture = ExtResource("1_3k37a")
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_6fmgw"]
+voxel_name = &"water"
+transparent = true
+transparency_index = 1
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(1, 1)
+cube_tiles_right = Vector2(1, 1)
+cube_tiles_bottom = Vector2(1, 1)
+cube_tiles_top = Vector2(1, 1)
+cube_tiles_back = Vector2(1, 1)
+cube_tiles_front = Vector2(1, 1)
+material_override_0 = SubResource("StandardMaterial3D_fu452")
+collision_enabled_0 = false
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_qw7xf"]
+voxel_name = &"log"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(2, 1)
+cube_tiles_right = Vector2(2, 1)
+cube_tiles_bottom = Vector2(0, 2)
+cube_tiles_top = Vector2(0, 2)
+cube_tiles_back = Vector2(2, 1)
+cube_tiles_front = Vector2(2, 1)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_ydkft"]
+voxel_name = &"leaves"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(1, 2)
+cube_tiles_right = Vector2(1, 2)
+cube_tiles_bottom = Vector2(1, 2)
+cube_tiles_top = Vector2(1, 2)
+cube_tiles_back = Vector2(1, 2)
+cube_tiles_front = Vector2(1, 2)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_kr3n2"]
+voxel_name = &"coal"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(3, 0)
+cube_tiles_right = Vector2(3, 0)
+cube_tiles_bottom = Vector2(3, 0)
+cube_tiles_top = Vector2(3, 0)
+cube_tiles_back = Vector2(3, 0)
+cube_tiles_front = Vector2(3, 0)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[sub_resource type="VoxelBlockyModel" id="VoxelBlockyModel_6xnvx"]
+voxel_name = &"iron"
+geometry_type = 1
+collision_aabbs = [AABB(0, 0, 0, 1, 1, 1)]
+cube_geometry_padding_y = null
+cube_tiles_left = Vector2(3, 1)
+cube_tiles_right = Vector2(3, 1)
+cube_tiles_bottom = Vector2(3, 1)
+cube_tiles_top = Vector2(3, 1)
+cube_tiles_back = Vector2(3, 1)
+cube_tiles_front = Vector2(3, 1)
+material_override_0 = ExtResource("1_8j8tj")
+collision_enabled_0 = true
+
+[resource]
+atlas_size = 9
+voxels/0 = SubResource("VoxelBlockyModel_w0jac")
+voxels/1 = SubResource("VoxelBlockyModel_mf1fv")
+voxels/2 = SubResource("VoxelBlockyModel_dxhap")
+voxels/3 = SubResource("VoxelBlockyModel_jhvbl")
+voxels/4 = SubResource("VoxelBlockyModel_cntde")
+voxels/5 = SubResource("VoxelBlockyModel_6fmgw")
+voxels/6 = SubResource("VoxelBlockyModel_qw7xf")
+voxels/7 = SubResource("VoxelBlockyModel_ydkft")
+voxels/8 = SubResource("VoxelBlockyModel_kr3n2")
+voxels/9 = SubResource("VoxelBlockyModel_6xnvx")
+voxels/10 = SubResource("VoxelBlockyModel_3rphd")
+voxels/11 = SubResource("VoxelBlockyModel_crt78")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://t5t2dsrwj52p"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/item_data.gd" id="1_u2fi8"]
+[ext_resource type="Texture2D" uid="uid://dh78ux68smska" path="res://Map.png" id="2_bqi6a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsd7f"]
+atlas = ExtResource("2_bqi6a")
+region = Rect2(0, 0, 160, 160)
+
+[resource]
+script = ExtResource("1_u2fi8")
+name = "Grass"
+description = "Block that is green I guess..."
+stackable = true
+texture = SubResource("AtlasTexture_fsd7f")
