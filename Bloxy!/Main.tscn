@@ -59,12 +59,14 @@ grow_vertical = 2
 script = ExtResource("8_p26xq")
 
 [node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("6_ukega")]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 60.0
 offset_bottom = 60.0
 
 [node name="EquipInventory" parent="UI/InventoryInterface" instance=ExtResource("6_ukega")]
+layout_mode = 0
 offset_left = 314.0
 offset_top = 21.0
 offset_right = 354.0
@@ -72,6 +74,7 @@ offset_bottom = 61.0
 
 [node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("6_ukega")]
 visible = false
+layout_mode = 0
 offset_left = 20.0
 offset_top = 307.0
 offset_right = 60.0
@@ -80,6 +83,7 @@ offset_bottom = 347.0
 [node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("10_5pv8b")]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 
 [node name="HotBatInv" parent="UI" instance=ExtResource("5_gpnje")]
 offset_left = 20.0

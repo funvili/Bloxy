@@ -72,8 +72,6 @@ func _physics_process(delta):
 		if minebuild == 'mine':
 			vt.mode = VoxelTool.MODE_REMOVE
 			vt.do_point(raycast())
-			#more testing on voxel physics
-			#for floodfill: end = false
 			CCL(raycast())
 		else:
 			vt.mode = VoxelTool.MODE_ADD
@@ -184,85 +182,89 @@ func floodfill(pos: Vector3):
 		floodfill(pos + Vector3.BACK)
 
 func CCL(pos: Vector3):
-	#It scans through a box of voxels, giving connected ones a "label" (ID)
-	#When different labels touch as it goes through them it merges them as a single label
-	#At the end, a grid of labels is obtained so each one can be extracted
-	#as its own "floating chunk" of voxels
+	const BOX_SIZE = 40
 	
-	var next_label = 0
-	
-	var data = []
-	var linked = []
+	var label = 1
 	var labels = []
+	var equal_labels = []
 	
-	var x = 0
-	var y = 0
-	var z = 0
-	
-	const BOX_SIZE = 20
-	while x < BOX_SIZE:
+	for x in BOX_SIZE:
 		labels.append([])
-		data.append([])
-		while y < BOX_SIZE:
+		for y in BOX_SIZE:
 			labels[x].append([])
-			data[x].append([])
-			while z < BOX_SIZE:
+			for z in BOX_SIZE:
 				labels[x][y].append(0)
-				var voxel = (pos - Vector3(10,10,10)) + Vector3(x,y,z)
-				data[x][y].append(vt.get_voxel(voxel))
-				z += 1
-			y += 1
-			z = 0
-		x += 1
-		y = 0
-		z = 0
-	x = 0
 	
-	for x2 in BOX_SIZE:
-		for y2 in BOX_SIZE:
-			for z2 in BOX_SIZE:
-				#var voxel = (pos - Vector3(10,10,10)) + Vector3(x2,y2,z2)
-				#vt.do_point(voxel)
-				#will need for when I turn them into ridgidbodies
-				if data[x2][y2][z2] != 0:
+	for x in BOX_SIZE:
+		for y in BOX_SIZE:
+			for z in BOX_SIZE:
+				var voxel = (pos - Vector3(BOX_SIZE / 2, BOX_SIZE / 2, BOX_SIZE / 2)) + Vector3(x,y,z)
+				
+				if vt.get_voxel(voxel) != 0:
 					var neighbors = []
-					if data[x2][y2+1][z2] != 0 and labels[x2][y2+1][z2] != null:
-						neighbors.append(labels[x2][y2+1][z2])
-					if data[x2][y2-1][z2] != 0 and labels[x2][y2-1][z2] != null:
-						neighbors.append(labels[x2][y2-1][z2])
-					if data[x2-1][y2][z2] != 0 and labels[x2-1][y2][z2] != null:
-						neighbors.append(labels[x2-1][y2][z2])
-					if data[x2+1][y2][z2] != 0 and labels[x2+1][y2][z2] != null:
-						neighbors.append(labels[x2+1][y2][z2])
-					if data[x2][y2][z2-1] != 0 and labels[x2][y2][z2-1] != null:
-						neighbors.append(labels[x2][y2][z2-1])
-					if data[x2][y2][z2+1] != 0 and labels[x2][y2][z2+1] != null:
-						neighbors.append(labels[x2][y2][z2+1])
+					if vt.get_voxel(Vector3(voxel.x-1,voxel.y,voxel.z)) != 0:
+						if labels[x-1][y][z] and labels[x-1][y][z] != 0:
+							neighbors.append(labels[x-1][y][z])
+					if vt.get_voxel(Vector3(voxel.x,voxel.y-1,voxel.z)) != 0:
+						if labels[x][y-1][z] and labels[x][y-1][z] != 0:
+							neighbors.append(labels[x][y-1][z])
+					if vt.get_voxel(Vector3(voxel.x,voxel.y,voxel.z-1)) != 0:
+						if labels[x][y][z-1] and labels[x][y][z-1] != 0:
+							neighbors.append(labels[x][y][z-1])
 					
 					if neighbors.size() == 0:
-						linked[next_label] = [next_label]
-						labels[x2][y2][z2] = next_label
-						next_label += 1
+						labels[x][y][z] = label
+						label += 1
+					elif neighbors.count(neighbors[0]) == neighbors.size():
+						labels[x][y][z] = neighbors[0]
 					else:
-						var L = neighbors
-						labels[x2][y2][z2] = min(L)
-						print(L)
-						for label in L:
-							linked[label].append(L)
+						labels[x][y][z] = neighbors.min()
+						
+						var matched = false
+						
+						for set in equal_labels:
+							for l in neighbors:
+								if set.has(l):# and not matched:
+									matched = true
+									equal_labels[equal_labels.find(set)].append_array(neighbors)
+						
+						if not equal_labels.has(neighbors) and not matched:
+							equal_labels.append(neighbors)
 	
-	#for x2 in BOX_SIZE:
-		#for y2 in BOX_SIZE:
-			#for z2 in BOX_SIZE:
-				#if data[x2][y2][z2] != 0:
-					#print(labels[x2][y2][z2])
-					#labels[x2][y2][z2] = labels.find(labels[x2][y2][z2])
+	var new_equal_labels = []
+	for set in equal_labels:
+		var unique_labels = []
+		for l in set:
+			if not unique_labels.has(l):
+				unique_labels.append(l)
+		unique_labels.sort()
+		if not new_equal_labels.has(unique_labels):
+			new_equal_labels.append(unique_labels)
+	equal_labels = new_equal_labels
+	new_equal_labels = []
 	
-	for x2 in BOX_SIZE:
-		for y2 in BOX_SIZE:
-			for z2 in BOX_SIZE:
-				var voxel = (pos - Vector3(10,10,10)) + Vector3(x2,y2,z2)
-				if labels[x2][y2][z2] == 1:
-					vt.mode = VoxelTool.MODE_ADD
+	#check each array after, if none of the unique numbers of the current array match
+	#add another array that the algorithm checks
+	#then if something matches but has a new number, add the new number
+	
+	for x in BOX_SIZE:
+		for y in BOX_SIZE:
+			for z in BOX_SIZE:
+				var voxel = (pos - Vector3(BOX_SIZE / 2, BOX_SIZE / 2, BOX_SIZE / 2)) + Vector3(x,y,z)
+				if vt.get_voxel(voxel) != 0:
+					for set in equal_labels:
+						if set.has(labels[x][y][z]):
+							labels[x][y][z] = set.min()
+	print(labels)
+	
+	vt.mode = VoxelTool.MODE_ADD
+	
+	for x in BOX_SIZE:
+		for y in BOX_SIZE:
+			for z in BOX_SIZE:
+				var voxel = (pos - Vector3(BOX_SIZE / 2, BOX_SIZE / 2, BOX_SIZE / 2)) + Vector3(x,y,z)
+				if vt.get_voxel(voxel) != 0: 
+					vt.value = labels[x][y][z] + 1
 					vt.do_point(voxel)
 
 func get_drop_position():

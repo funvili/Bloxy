@@ -8,7 +8,6 @@ offset_bottom = 40.0
 script = ExtResource("1_rvifm")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 8
@@ -17,7 +16,6 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
-layout_mode = 2
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 32.0
