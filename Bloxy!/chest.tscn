@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bttfpahyyycgq"]
-
-[ext_resource type="Script" path="res://inv_stuff/Chest.gd" id="1_r7efy"]
-
-[node name="Chest" type="Node3D" groups=["chest"]]
-script = ExtResource("1_r7efy")

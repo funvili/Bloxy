@@ -1,9 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c1dlfd80b1bks"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5x15w"]
-load_path = "res://.godot/imported/Map.png-102a787702bb79280fe9137f394f2318.s3tc.ctex"
-
-[resource]
-atlas = SubResource("CompressedTexture2D_5x15w")
-region = Rect2(160, 160, 160, 160)
-filter_clip = true
