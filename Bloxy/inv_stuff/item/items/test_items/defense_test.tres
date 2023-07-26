@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bms81xpqbxgdy"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/item_data_equip.gd" id="1_gnw2j"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5x15w"]
+load_path = "res://.godot/imported/Map.png-102a787702bb79280fe9137f394f2318.s3tc.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_beocp"]
+atlas = SubResource("CompressedTexture2D_5x15w")
+region = Rect2(0, 1270, 160, 160)
+filter_clip = true
+
+[resource]
+script = ExtResource("1_gnw2j")
+defense = 1
+name = "EquipTest"
+description = "Can be put in equip_inventory"
+stackable = false
+texture = SubResource("AtlasTexture_beocp")

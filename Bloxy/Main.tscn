@@ -1,0 +1,164 @@
+[gd_scene load_steps=23 format=3 uid="uid://bp4ketiba7l3v"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_a8caj"]
+[ext_resource type="Script" path="res://player/CharacterBody3d.gd" id="1_lcgjd"]
+[ext_resource type="Script" path="res://player/SpringArm3d.gd" id="2_g1uqq"]
+[ext_resource type="Resource" uid="uid://cmkkhpb13o3qn" path="res://inv_stuff/test_inv.tres" id="2_gtdto"]
+[ext_resource type="VoxelGeneratorGraph" uid="uid://da67kl7bge58q" path="res://Generation.tres" id="3_wl46y"]
+[ext_resource type="VoxelBlockyLibrary" uid="uid://ciqvi7kfhiitg" path="res://Blocks.tres" id="4_4cgp5"]
+[ext_resource type="Script" path="res://Terrain.gd" id="5_ftkgx"]
+[ext_resource type="PackedScene" uid="uid://qf6o3kool5e6" path="res://inv_stuff/inventory/hot_bat_inv.tscn" id="5_gpnje"]
+[ext_resource type="PackedScene" uid="uid://boof1egbrqsg5" path="res://inv_stuff/inventory/Inventory.tscn" id="6_ukega"]
+[ext_resource type="Script" path="res://inv_stuff/inventory/inventory_data_equip.gd" id="8_jbik6"]
+[ext_resource type="Script" path="res://inv_stuff/inventory/inventory_interface.gd" id="8_p26xq"]
+[ext_resource type="PackedScene" uid="uid://diex08t5n14ga" path="res://inv_stuff/inventory/Slot.tscn" id="10_5pv8b"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ep5oc"]
+sky_top_color = Color(0.623529, 0.941176, 1, 1)
+sky_horizon_color = Color(0.811765, 0.970588, 1, 1)
+ground_bottom_color = Color(0.623529, 0.941176, 1, 1)
+ground_horizon_color = Color(0.811765, 0.970588, 1, 1)
+
+[sub_resource type="Sky" id="Sky_rtg1w"]
+sky_material = SubResource("ProceduralSkyMaterial_ep5oc")
+
+[sub_resource type="Environment" id="Environment_vfmhe"]
+background_mode = 2
+sky = SubResource("Sky_rtg1w")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_5r0h6"]
+script = ExtResource("8_jbik6")
+slot_datas = [null]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3rioy"]
+radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uinyf"]
+size = Vector3(1.5, 0.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b4r6"]
+albedo_color = Color(0, 0, 0, 0.862745)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ipep"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[sub_resource type="VoxelStreamRegionFiles" id="VoxelStreamRegionFiles_ejppc"]
+
+[sub_resource type="VoxelMesherBlocky" id="VoxelMesherBlocky_6mo0y"]
+library = ExtResource("4_4cgp5")
+
+[node name="Node3d" type="Node3D"]
+script = ExtResource("1_a8caj")
+
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_p26xq")
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("6_ukega")]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="EquipInventory" parent="UI/InventoryInterface" instance=ExtResource("6_ukega")]
+offset_left = 314.0
+offset_top = 21.0
+offset_right = 354.0
+offset_bottom = 61.0
+
+[node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("6_ukega")]
+visible = false
+offset_left = 20.0
+offset_top = 307.0
+offset_right = 60.0
+offset_bottom = 347.0
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("10_5pv8b")]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="HotBatInv" parent="UI" instance=ExtResource("5_gpnje")]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 304.0
+offset_bottom = 100.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vfmhe")
+
+[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 3.0
+shadow_enabled = true
+
+[node name="CharacterBody3d" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 20)
+input_capture_on_drag = true
+mass = 10.0
+continuous_cd = true
+lock_rotation = true
+script = ExtResource("1_lcgjd")
+inventory_data = ExtResource("2_gtdto")
+equip_inventory_data = SubResource("Resource_5r0h6")
+
+[node name="CsgBox3d" type="CSGBox3D" parent="CharacterBody3d"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="CharacterBody3d"]
+shape = SubResource("SphereShape3D_3rioy")
+
+[node name="SpringArm3d" type="SpringArm3D" parent="CharacterBody3d"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.5, 0)
+spring_length = 7.0
+script = ExtResource("2_g1uqq")
+
+[node name="Camera3d" type="Camera3D" parent="CharacterBody3d/SpringArm3d"]
+
+[node name="VoxelViewer" type="VoxelViewer" parent="CharacterBody3d"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+view_distance = 100
+
+[node name="Land" type="Area3D" parent="CharacterBody3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="CharacterBody3d/Land"]
+shape = SubResource("BoxShape3D_uinyf")
+
+[node name="Interact" type="CSGBox3D" parent="CharacterBody3d"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 3)
+collision_layer = 2
+collision_mask = 2
+material = SubResource("StandardMaterial3D_4b4r6")
+
+[node name="Area3d" type="Area3D" parent="CharacterBody3d/Interact"]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="CharacterBody3d/Interact/Area3d"]
+shape = SubResource("BoxShape3D_8ipep")
+
+[node name="ToInteract" type="RayCast3D" parent="CharacterBody3d"]
+target_position = Vector3(0, -2, 0)
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
+stream = SubResource("VoxelStreamRegionFiles_ejppc")
+generator = ExtResource("3_wl46y")
+mesher = SubResource("VoxelMesherBlocky_6mo0y")
+max_view_distance = 50
+script = ExtResource("5_ftkgx")
+
+[node name="RigidBodies" type="Node" parent="."]
+
+[connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_inventory_interface_gui_input"]
+[connection signal="gui_input" from="UI/InventoryInterface" to="CharacterBody3d/SpringArm3d" method="_on_inventory_interface_gui_input"]
+[connection signal="visibility_changed" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_inventory_interface_visibility_changed"]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://didvhwvjs6t07"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/item_data.gd" id="1_l26ff"]
+[ext_resource type="Texture2D" uid="uid://dh78ux68smska" path="res://Map.png" id="2_ugleb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek8eg"]
+atlas = ExtResource("2_ugleb")
+region = Rect2(480, 320, 160, 160)
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_l26ff")
+name = "Wooden Crate"
+description = "A wooden box that can contain up to 8 slots"
+stackable = true
+texture = SubResource("AtlasTexture_ek8eg")

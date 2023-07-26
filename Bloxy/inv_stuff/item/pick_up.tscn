@@ -1,0 +1,86 @@
+[gd_scene load_steps=15 format=3 uid="uid://dxaban8m43bkv"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/pick_up.gd" id="1_7fyhy"]
+[ext_resource type="Texture2D" uid="uid://chwrukl328uvc" path="res://inv_stuff/item/items/item_images/Raw Coal.png" id="2_q2vxp"]
+[ext_resource type="Texture2D" uid="uid://te0ye4r14dv5" path="res://inv_stuff/item/items/item_images/Raw Iron.png" id="3_00gev"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owo1r"]
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+emission_texture = ExtResource("2_q2vxp")
+normal_scale = 16.0
+normal_texture = ExtResource("3_00gev")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o8rlh"]
+size = Vector3(0.9, 0.9, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_afpud"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bw3n"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qajyl"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_4bw3n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lx2h"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_v87gp"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6lx2h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbfko"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7r2jx"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vbfko")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71use"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_pqxg4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_71use")
+
+[node name="PickUp" type="RigidBody3D"]
+continuous_cd = true
+freeze = true
+script = ExtResource("1_7fyhy")
+
+[node name="CsgBox3d" type="CSGBox3D" parent="."]
+material_override = SubResource("StandardMaterial3D_owo1r")
+size = Vector3(0.9, 0.9, 0.9)
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_o8rlh")
+
+[node name="Area3d" type="Area3D" parent="."]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="Area3d"]
+shape = SubResource("BoxShape3D_afpud")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="."]
+view_distance = 20
+requires_visuals = false
+
+[node name="Top" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, -3.93402e-08, 1, 0, -0.9, -4.37114e-08, 0, 0.451, 0)
+visible = false
+mesh = SubResource("QuadMesh_qajyl")
+
+[node name="Bottom" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, -3.93402e-08, -1, 0, 0.9, -4.37114e-08, 0, -0.451, 0)
+visible = false
+mesh = SubResource("QuadMesh_v87gp")
+
+[node name="Left" type="CSGMesh3D" parent="."]
+transform = Transform3D(-3.93402e-08, 3.55271e-15, 1, 0, 0.9, 0, -0.9, -1.55294e-22, -4.37114e-08, 0.451, -1.97138e-08, -1.97138e-08)
+visible = false
+mesh = SubResource("QuadMesh_7r2jx")
+
+[node name="Right" type="CSGMesh3D" parent="."]
+transform = Transform3D(-3.93402e-08, -7.86805e-08, -1, 0, -0.9, 8.74228e-08, -0.9, -2.95565e-15, 4.37114e-08, -0.451, 1.97138e-08, 1.97138e-08)
+visible = false
+mesh = SubResource("QuadMesh_pqxg4")
+
+[connection signal="body_entered" from="Area3d" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3d" to="." method="_on_area_3d_body_exited"]

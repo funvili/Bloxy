@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://bbb6roxubx5ps"]
+
+[ext_resource type="Script" path="res://inv_stuff/item/item_data_container.gd" id="1_uw3gi"]
+[ext_resource type="Texture2D" uid="uid://dh78ux68smska" path="res://Map.png" id="2_3xoee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cps37"]
+atlas = ExtResource("2_3xoee")
+region = Rect2(0, 480, 160, 160)
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_uw3gi")
+amount_left = 10
+name = "Stone Pail"
+description = "Made from stone, this pail can store 10 units of water"
+stackable = false
+texture = SubResource("AtlasTexture_cps37")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtnpwtm7lyuqe"]
+
+[ext_resource type="Script" path="res://physics_stuff/rigid_body.gd" id="1_psknx"]
+
+[node name="RigidBody3d" type="RigidBody3D"]
+continuous_cd = true
+script = ExtResource("1_psknx")
+
+[node name="VoxelViewer" type="VoxelViewer" parent="."]
+view_distance = 50
+requires_visuals = false

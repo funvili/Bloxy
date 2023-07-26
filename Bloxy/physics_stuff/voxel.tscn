@@ -1,0 +1,73 @@
+[gd_scene load_steps=13 format=3 uid="uid://clkpei4s8vyo1"]
+
+[ext_resource type="Script" path="res://physics_stuff/voxel.gd" id="1_p78d5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kgeen"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwgm3"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxk7w"]
+resource_local_to_scene = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_74qje"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_kxk7w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_meqfe"]
+resource_local_to_scene = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_iicex"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_meqfe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xvcay"]
+resource_local_to_scene = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_wim8d"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_xvcay")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vewi2"]
+resource_local_to_scene = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_u5xg4"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vewi2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_018n5"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[node name="CollisionShape3d" type="CollisionShape3D"]
+shape = SubResource("BoxShape3D_kgeen")
+script = ExtResource("1_p78d5")
+
+[node name="CsgBox3d" type="CSGBox3D" parent="."]
+material_override = SubResource("StandardMaterial3D_pwgm3")
+
+[node name="Top" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, -3.93402e-08, 1, 0, -0.9, -4.37114e-08, 0, 0.451, 0)
+visible = false
+mesh = SubResource("QuadMesh_74qje")
+
+[node name="Bottom" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, -3.93402e-08, -1, 0, 0.9, -4.37114e-08, 0, -0.451, 0)
+visible = false
+mesh = SubResource("QuadMesh_iicex")
+
+[node name="Left" type="CSGMesh3D" parent="."]
+transform = Transform3D(-3.93402e-08, 3.55271e-15, 1, 0, 0.9, 0, -0.9, -1.55294e-22, -4.37114e-08, 0.451, -1.97138e-08, -1.97138e-08)
+visible = false
+mesh = SubResource("QuadMesh_wim8d")
+
+[node name="Right" type="CSGMesh3D" parent="."]
+transform = Transform3D(-3.93402e-08, -7.86805e-08, -1, 0, -0.9, 8.74228e-08, -0.9, -2.95565e-15, 4.37114e-08, -0.451, 1.97138e-08, 1.97138e-08)
+visible = false
+mesh = SubResource("QuadMesh_u5xg4")
+
+[node name="Area3d" type="Area3D" parent="."]
+
+[node name="CollisionShape3d" type="CollisionShape3D" parent="Area3d"]
+shape = SubResource("BoxShape3D_018n5")
+
+[connection signal="area_entered" from="Area3d" to="." method="_on_area_3d_area_entered"]

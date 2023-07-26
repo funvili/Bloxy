@@ -1,0 +1,272 @@
+[gd_resource type="VoxelGeneratorGraph" load_steps=11 format=3 uid="uid://da67kl7bge58q"]
+
+[sub_resource type="ZN_FastNoiseLiteGradient" id="ZN_FastNoiseLiteGradient_k5j1b"]
+period = 25.0
+amplitude = 25.0
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_k24m4"]
+period = 500.0
+warp_noise = SubResource("ZN_FastNoiseLiteGradient_k5j1b")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4tgus"]
+frequency = 1.0
+
+[sub_resource type="Curve" id="Curve_u64vx"]
+min_value = -20.0
+max_value = 200.0
+_data = [Vector2(0, -20), 0.0, 122.5, 0, 0, Vector2(0.2, 4.5), 85.5488, 85.5488, 0, 0, Vector2(0.6, 30), 62.5641, 62.5641, 0, 0, Vector2(0.862295, 94), 705.313, 705.313, 0, 0, Vector2(1, 200), 802.632, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="ZN_FastNoiseLiteGradient" id="ZN_FastNoiseLiteGradient_quxaw"]
+period = 25.0
+amplitude = 20.0
+fractal_type = 2
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_yv6n6"]
+noise_type = 1
+period = 300.0
+warp_noise = SubResource("ZN_FastNoiseLiteGradient_quxaw")
+fractal_type = 3
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_k7xp0"]
+noise_type = 1
+period = 20.0
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_fdlcn"]
+noise_type = 1
+seed = 1
+period = 20.0
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_lo0vj"]
+noise_type = 1
+period = 20.0
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_libnl"]
+noise_type = 1
+period = 1000.0
+
+[resource]
+graph_data = {
+"connections": [[50, 0, 52, 0], [50, 0, 51, 0], [42, 0, 47, 0], [51, 0, 64, 2], [43, 0, 48, 0], [43, 0, 51, 1], [43, 0, 56, 1], [43, 0, 57, 2], [43, 0, 75, 2], [43, 0, 77, 2], [44, 0, 47, 1], [47, 0, 53, 0], [48, 0, 52, 1], [49, 0, 50, 0], [52, 0, 62, 2], [52, 0, 65, 2], [52, 0, 63, 2], [53, 0, 54, 0], [54, 0, 55, 0], [55, 0, 56, 0], [56, 0, 80, 1], [57, 0, 58, 1], [58, 0, 59, 1], [59, 0, 60, 1], [60, 0, 61, 0], [62, 0, 63, 0], [63, 0, 64, 1], [64, 0, 58, 0], [65, 0, 59, 0], [66, 0, 67, 2], [67, 0, 68, 1], [68, 0, 65, 0], [68, 0, 60, 0], [69, 0, 68, 2], [70, 0, 72, 2], [72, 0, 67, 0], [73, 0, 74, 2], [74, 0, 72, 1], [75, 0, 74, 0], [76, 0, 78, 2], [77, 0, 78, 0], [78, 0, 74, 1], [79, 0, 81, 0], [80, 0, 58, 2], [80, 0, 59, 2], [80, 0, 60, 2], [80, 0, 69, 1], [81, 0, 80, 0]],
+"nodes": {
+"42": {
+"gui_position": Vector2(340, 40),
+"type": "InputX"
+},
+"43": {
+"gui_position": Vector2(340, 160),
+"type": "InputY"
+},
+"44": {
+"gui_position": Vector2(340, 100),
+"type": "InputZ"
+},
+"47": {
+"auto_connect": true,
+"gui_position": Vector2(440, 60),
+"noise": SubResource("ZN_FastNoiseLite_k24m4"),
+"type": "FastNoise2D"
+},
+"48": {
+"b": -1.0,
+"gui_position": Vector2(440, 160),
+"type": "Multiply"
+},
+"49": {
+"auto_connect": true,
+"gui_position": Vector2(440, -40),
+"noise": SubResource("FastNoiseLite_4tgus"),
+"type": "Noise2D",
+"x": 0.0,
+"y": 0.0
+},
+"50": {
+"b": 3.0,
+"gui_position": Vector2(620, -40),
+"type": "Multiply"
+},
+"51": {
+"gui_position": Vector2(780, -40),
+"type": "Add"
+},
+"52": {
+"gui_position": Vector2(780, -140),
+"type": "Add"
+},
+"53": {
+"gui_position": Vector2(620, 60),
+"max0": 1.0,
+"max1": 1.0,
+"min0": -1.0,
+"min1": 0.0,
+"type": "Remap"
+},
+"54": {
+"curve": SubResource("Curve_u64vx"),
+"gui_position": Vector2(760, 60),
+"type": "Curve"
+},
+"55": {
+"b": -1.0,
+"gui_position": Vector2(900, 60),
+"type": "Multiply"
+},
+"56": {
+"gui_position": Vector2(1040, 60),
+"type": "Add"
+},
+"57": {
+"a": 5.0,
+"b": 0.0,
+"gui_position": Vector2(1460, 60),
+"threshold": 23.0,
+"type": "Select"
+},
+"58": {
+"gui_position": Vector2(1600, 60),
+"threshold": 0.0,
+"type": "Select"
+},
+"59": {
+"gui_position": Vector2(1740, 80),
+"threshold": -1.0,
+"type": "Select"
+},
+"60": {
+"gui_position": Vector2(1880, 80),
+"threshold": -5.0,
+"type": "Select"
+},
+"61": {
+"gui_position": Vector2(1980, 80),
+"type": "OutputType"
+},
+"62": {
+"a": 3.0,
+"b": 2.0,
+"gui_position": Vector2(900, -60),
+"threshold": -50.0,
+"type": "Select"
+},
+"63": {
+"b": 1.0,
+"gui_position": Vector2(1040, -60),
+"threshold": -40.0,
+"type": "Select"
+},
+"64": {
+"a": 4.0,
+"gui_position": Vector2(1460, -60),
+"threshold": 3.0,
+"type": "Select"
+},
+"65": {
+"b": 2.0,
+"gui_position": Vector2(1600, -60),
+"threshold": -50.0,
+"type": "Select"
+},
+"66": {
+"auto_connect": true,
+"gui_position": Vector2(980, 180),
+"noise": SubResource("ZN_FastNoiseLite_yv6n6"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"67": {
+"b": 0.0,
+"gui_position": Vector2(1160, 180),
+"threshold": 0.7,
+"type": "Select"
+},
+"68": {
+"a": 3.0,
+"gui_position": Vector2(1460, 180),
+"threshold": 10.0,
+"type": "Select"
+},
+"69": {
+"a": -1.0,
+"gui_position": Vector2(1300, 240),
+"type": "Multiply"
+},
+"70": {
+"auto_connect": true,
+"gui_position": Vector2(980, 320),
+"noise": SubResource("ZN_FastNoiseLite_k7xp0"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"72": {
+"a": 8.0,
+"gui_position": Vector2(1160, 300),
+"threshold": -0.6,
+"type": "Select"
+},
+"73": {
+"auto_connect": true,
+"gui_position": Vector2(980, 440),
+"noise": SubResource("ZN_FastNoiseLite_fdlcn"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"74": {
+"gui_position": Vector2(1300, 440),
+"threshold": -0.6,
+"type": "Select"
+},
+"75": {
+"a": 9.0,
+"b": 3.0,
+"gui_position": Vector2(1160, 440),
+"threshold": -50.0,
+"type": "Select"
+},
+"76": {
+"auto_connect": true,
+"gui_position": Vector2(980, 580),
+"noise": SubResource("ZN_FastNoiseLite_lo0vj"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"77": {
+"a": 10.0,
+"b": 3.0,
+"gui_position": Vector2(1160, 580),
+"threshold": -100.0,
+"type": "Select"
+},
+"78": {
+"b": 3.0,
+"gui_position": Vector2(1300, 580),
+"threshold": -0.6,
+"type": "Select"
+},
+"79": {
+"auto_connect": true,
+"gui_position": Vector2(1160, -40),
+"noise": SubResource("ZN_FastNoiseLite_libnl"),
+"type": "FastNoise2D",
+"x": 0.0,
+"y": 0.0
+},
+"80": {
+"gui_position": Vector2(1220, 60),
+"type": "Add"
+},
+"81": {
+"b": 80.0,
+"gui_position": Vector2(1320, -40),
+"type": "Multiply"
+}
+},
+"version": 2
+}
